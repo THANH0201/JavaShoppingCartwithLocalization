@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LanguageSelector.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JavaShoppingCartwithLocalization</a> &gt; <a href="index.source.html" class="el_package">localization</a> &gt; <span class="el_source">LanguageSelector.java</span></div><h1>LanguageSelector.java</h1><pre class="source lang-java linenums">package localization;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+<span class="nc" id="L6">public class LanguageSelector {</span>
+
+    public static Locale selectLanguage() {
+<span class="nc" id="L9">        Scanner sc = new Scanner(System.in);</span>
+
+<span class="nc" id="L11">        System.out.println(&quot;Select language:&quot;);</span>
+<span class="nc" id="L12">        System.out.println(&quot;1. English&quot;);</span>
+<span class="nc" id="L13">        System.out.println(&quot;2. Finnish&quot;);</span>
+<span class="nc" id="L14">        System.out.println(&quot;3. Swedish&quot;);</span>
+<span class="nc" id="L15">        System.out.println(&quot;4. Japanese&quot;);</span>
+
+<span class="nc" id="L17">        int lang = sc.nextInt();</span>
+<span class="nc" id="L18">        return getLocaleByChoice(lang);</span>
+    }
+
+    public static Locale getLocaleByChoice(int lang) {
+<span class="fc bfc" id="L22" title="All 4 branches covered.">        switch (lang) {</span>
+<span class="fc" id="L23">            case 2: return new Locale(&quot;fi&quot;, &quot;FI&quot;);</span>
+<span class="fc" id="L24">            case 3: return new Locale(&quot;sv&quot;, &quot;SE&quot;);</span>
+<span class="fc" id="L25">            case 4: return new Locale(&quot;ja&quot;, &quot;JP&quot;);</span>
+<span class="fc" id="L26">            default: return new Locale(&quot;en&quot;, &quot;US&quot;);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

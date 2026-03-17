@@ -1,0 +1,5 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+JavaShoppingCartwithLocalization,localization,CartCalculator,3,32,0,2,1,7,1,4,1,3
+JavaShoppingCartwithLocalization,localization,LanguageSelector,29,26,0,4,9,5,2,4,2,1
+JavaShoppingCartwithLocalization,localization,Item,0,18,0,0,0,6,0,2,0,2
+JavaShoppingCartwithLocalization,localization,Main,258,0,8,0,48,0,6,0,2,0
