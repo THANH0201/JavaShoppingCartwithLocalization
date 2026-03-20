@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JavaShoppingCartwithLocalization</a> &gt; <a href="index.source.html" class="el_package">localization</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package localization;
+
+import java.util.*;
+
+<span class="nc" id="L5">public class Main {</span>
+    public static void main(String[] args) {
+
+<span class="nc" id="L8">        Scanner sc = new Scanner(System.in);</span>
+
+<span class="nc" id="L10">        Locale locale = LanguageSelector.selectLanguage();</span>
+<span class="nc" id="L11">        ResourceBundle rb = ResourceBundle.getBundle(&quot;MessagesBundle&quot;, locale);</span>
+
+        // Shopping cart
+<span class="nc" id="L14">        HashMap&lt;String, Item&gt; cart = new HashMap&lt;&gt;();</span>
+
+        // List items
+<span class="nc" id="L17">        HashMap&lt;Integer, String&gt; items = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L18">        items.put(1, rb.getString(&quot;item.apple&quot;));</span>
+<span class="nc" id="L19">        items.put(2, rb.getString(&quot;item.banana&quot;));</span>
+<span class="nc" id="L20">        items.put(3, rb.getString(&quot;item.orange&quot;));</span>
+<span class="nc" id="L21">        items.put(4, rb.getString(&quot;item.watermelon&quot;));</span>
+<span class="nc" id="L22">        items.put(5, rb.getString(&quot;item.pineapple&quot;));</span>
+
+        while (true) {
+            try {
+<span class="nc" id="L26">                System.out.println(rb.getString(&quot;welcome&quot;));</span>
+
+                // Display items
+<span class="nc bnc" id="L29" title="All 2 branches missed.">                for (int key : items.keySet()) {</span>
+<span class="nc" id="L30">                    System.out.println(key + &quot;. &quot; + items.get(key));</span>
+<span class="nc" id="L31">                }</span>
+
+<span class="nc" id="L33">                System.out.println(rb.getString(&quot;enter.items&quot;));</span>
+<span class="nc" id="L34">                int n = sc.nextInt();</span>
+<span class="nc" id="L35">                String name = items.get(n);</span>
+
+<span class="nc" id="L37">                System.out.println(rb.getString(&quot;enter.price&quot;));</span>
+<span class="nc" id="L38">                double price = sc.nextDouble();</span>
+
+<span class="nc" id="L40">                System.out.println(rb.getString(&quot;enter.quantity&quot;));</span>
+<span class="nc" id="L41">                double quantity = sc.nextDouble();</span>
+
+<span class="nc" id="L43">                Item item = new Item(name, price, quantity);</span>
+<span class="nc" id="L44">                cart.put(name, item);</span>
+
+<span class="nc" id="L46">                System.out.println(rb.getString(&quot;added&quot;) + &quot; &quot; + name +</span>
+                        &quot; | price: &quot; + price +
+                        &quot; | quantity: &quot; + quantity +
+<span class="nc" id="L49">                        &quot; | total: &quot; + item.getTotal());</span>
+
+<span class="nc" id="L51">                System.out.println(rb.getString(&quot;add.more&quot;));</span>
+<span class="nc" id="L52">                String ans = sc.next();</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">                if (ans.equalsIgnoreCase(&quot;n&quot;)) break;</span>
+
+<span class="nc" id="L55">            } catch (InputMismatchException ex) {</span>
+<span class="nc" id="L56">                System.out.println(rb.getString(&quot;error.integer&quot;));</span>
+<span class="nc" id="L57">                sc.nextLine(); // clear buffer</span>
+<span class="nc" id="L58">            }</span>
+        }
+
+        // TOTAL CALCULATION
+<span class="nc" id="L62">        double total = CartCalculator.calculateTotal(cart);</span>
+
+<span class="nc" id="L64">        System.out.println(rb.getString(&quot;total&quot;) + &quot; &quot; + String.format(&quot;%.2f&quot;, total) + &quot; EUR&quot;);</span>
+
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (total &gt;= 5) {</span>
+<span class="nc" id="L67">            System.out.println(rb.getString(&quot;discount&quot;));</span>
+<span class="nc" id="L68">            total = CartCalculator.applyDiscount(total);</span>
+        }
+
+<span class="nc" id="L71">        System.out.println(rb.getString(&quot;total.after.discount&quot;) + &quot; &quot; + String.format(&quot;%.2f&quot;, total) + &quot; EUR&quot;);</span>
+
+<span class="nc" id="L73">        System.out.println(rb.getString(&quot;tax&quot;));</span>
+<span class="nc" id="L74">        total = CartCalculator.applyTax(total);</span>
+
+<span class="nc" id="L76">        System.out.println(rb.getString(&quot;total.after.tax&quot;) + &quot; &quot; + String.format(&quot;%.2f&quot;, total) + &quot; EUR&quot;);</span>
+
+        // PAYMENT
+<span class="nc" id="L79">        System.out.println(rb.getString(&quot;pay&quot;));</span>
+<span class="nc" id="L80">        String pay = sc.next();</span>
+
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (pay.equalsIgnoreCase(&quot;y&quot;)) {</span>
+<span class="nc" id="L83">            System.out.println(rb.getString(&quot;thanks&quot;));</span>
+        } else {
+<span class="nc" id="L85">            System.out.println(rb.getString(&quot;sorry&quot;));</span>
+        }
+<span class="nc" id="L87">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
